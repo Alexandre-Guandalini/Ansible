@@ -16,6 +16,7 @@
           password: "{{pass}}"
         - name: "{{user2}}"
           password: "{{pass2}}"
+      when: ansible_facts['distribution'] == "Ubuntu"
 
     - name: debug user
       debug:
