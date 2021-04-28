@@ -1,0 +1,6 @@
+---
+dependencies:
+  - role: create_user
+    service:
+      name: apache2
+      state: started

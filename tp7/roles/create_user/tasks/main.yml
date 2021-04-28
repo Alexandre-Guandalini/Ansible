@@ -1,0 +1,12 @@
+---
+- name: "Add user in {{env}}" 
+  user:
+    name: "{{item.name}}"
+    password: "{{item.password}}"
+    state: present 
+  loop:
+    - name: "{{user}}" 
+      password: "{{pass}}"
+    - name: "{{user2}}"
+      password: "{{pass2}}"
+  when: ansible_facts['distribution'] == "Ubuntu"
