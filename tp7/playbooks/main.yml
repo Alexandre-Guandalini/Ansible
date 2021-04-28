@@ -5,6 +5,4 @@
           - "vars/{{env}}_vars.yml"
           - "vars/{{env}}_vault.yml"
   roles:
-          #- { role: create_user }
-          #- { role: vim_install }
           - { role: apache }

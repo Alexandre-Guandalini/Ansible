@@ -1,14 +1,20 @@
 ---
 - name: "Add user in {{env}}" 
   user:
-    name: "{{name}}"
+    name: "{{user}}"
     password: "{{pass}}"
     state: present
-    service: 
-      name: apache2
-      state: started
+    shell: service apache2 start
   register: adduser_ouput
 
 - name: debug user
   debug:
     msg: "{{adduser_ouput}}"
+
+- name: check service apache
+  shell: service apache2 status
+  register: service_apache_output
+
+- name: show status service apache
+  debug:
+    msg: "{{service_apache_output}}"
