@@ -1,0 +1,49 @@
+---
+- name: install apache2
+  apt: 
+    name: apache2 
+    update_cache: yes 
+    state: "{{status_apache}}" 
+  register: apache_output
+
+- name: show intall apache
+  debug:
+    msg: "{{apache_output}}"
+
+- name: start service apache
+  service:
+    name: apache2
+    state: "{{status_service_apache}}"
+  register: service_apache_output
+
+- name: debug service apache
+  debug:
+    msg: "{{service_apache_output}}"
+
+- name: check service apache
+  shell: service apache2 status
+  register: service_apache_output
+
+- name: show status service apache
+  debug:
+    msg: "{{service_apache_output}}"
+
+- name: Copy toto.txt
+  copy:
+    src: "files/toto.txt"
+    dest: "/tmp/toto.txt"
+  register: copy_txt
+
+- name: show copy txt
+  debug:
+    msg: "{{copy_txt}}"
+
+- name: Copy index
+  template:
+    src: 'templates/index.html.j2'
+    dest: '/var/www/html/index.html'
+  register: copy_index
+
+- name: show copy index 
+  debug:
+    msg: "{{copy_index}}"
