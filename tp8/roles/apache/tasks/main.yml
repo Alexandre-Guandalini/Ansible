@@ -10,24 +10,6 @@
   debug:
     msg: "{{apache_output}}"
 
-- name: start service apache
-  service:
-    name: apache2
-    state: "{{status_service_apache}}"
-  register: service_apache_output
-
-- name: debug service apache
-  debug:
-    msg: "{{service_apache_output}}"
-
-- name: check service apache
-  shell: service apache2 status
-  register: service_apache_output
-
-- name: show status service apache
-  debug:
-    msg: "{{service_apache_output}}"
-
 - name: Copy toto.txt
   copy:
     src: "files/toto.txt"
@@ -43,6 +25,11 @@
     src: 'templates/index.html.j2'
     dest: '/var/www/html/index.html'
   register: copy_index
+  notify: 
+    - restart service apache
+    - debug service apache
+    - check service apache
+    - show status service apache
 
 - name: show copy index 
   debug:

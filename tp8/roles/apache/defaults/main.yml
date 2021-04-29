@@ -1,4 +1,4 @@
 ---
 my_name: "Guandalinux"
 status_apache: "present"
-status_service_apache: "started"
+status_service_apache: "restarted"

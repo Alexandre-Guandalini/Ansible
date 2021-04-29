@@ -1,0 +1,17 @@
+- name: restart service apache
+  service:
+    name: apache2
+    state: "{{status_service_apache}}"
+  register: service_apache_output
+
+- name: debug service apache
+  debug:
+    msg: "{{service_apache_output}}"
+
+- name: check service apache
+  shell: service apache2 status
+  register: service_apache_output
+
+- name: show status service apache
+  debug:
+    msg: "{{service_apache_output}}"
