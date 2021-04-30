@@ -27,21 +27,6 @@
   debug:
     msg: "{{copy_conf}}"
 
-- name: Copy index
-  template:
-    src: 'templates/index.html.j2'
-    dest: '/var/www/html/index.html'
-  register: copy_index
-  notify: 
-    - restart service apache
-    - debug service apache
-    - check service apache
-    - show status service apache
-
-- name: show copy index 
-  debug:
-    msg: "{{copy_index}}"
-
 - name: Check server web return 200
   uri:
     url: "http://{{ ansible_host }}"

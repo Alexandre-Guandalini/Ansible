@@ -1,0 +1,28 @@
+---
+- name: Install LAMP Packages
+  apt: 
+    name: "{{ item }}" 
+    update_cache: yes 
+    state: latest
+  loop:
+    - php
+    - php-mysql
+    - libapache2-mod-php
+  register: install_php
+
+- name: show install php
+  debug:
+    msg: "{{install_php}}"
+
+- name: Copy index                                                                                  
+  template:
+    src: '{{item.src}}'                                                         
+    dest: '{{item.dest}}'                                                                    
+  register: copy_file_php
+  with_items:
+      - { src: 'templates/index.php.j2', dest: '/var/www/index.php' }
+      - { src: 'templates/phpinfo.php.j2', dest: '/var/www/phpinfo.php' }  
+
+- name: show copy file php
+  debug:
+    msg: "{{copy_file_php}}"
