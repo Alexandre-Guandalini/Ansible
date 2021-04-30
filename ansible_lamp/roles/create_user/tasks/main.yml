@@ -1,0 +1,12 @@
+---
+- name: "Add user in {{env}}" 
+  user:
+    name: "{{user}}"
+    password: "{{pass}}"
+    uid: 900
+    state: "{{status_user}}"
+  register: adduser_ouput
+
+- name: debug user
+  debug:
+    msg: "{{adduser_ouput}}"

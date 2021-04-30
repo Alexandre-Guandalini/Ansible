@@ -1,0 +1,28 @@
+- name: restart service apache
+  become_user: "{{user}}" 
+  service:
+    name: apache2
+    state: "{{status_service_apache}}"
+  register: service_apache_output
+
+- name: debug service apache
+  debug:
+    msg: "{{service_apache_output}}"
+
+- name: check service apache
+  shell: service apache2 status
+  register: service_apache_output
+
+- name: show status service apache
+  debug:
+    msg: "{{service_apache_output}}"
+
+    #- name: Check server web return 200
+    #  uri:
+    #    url: "http://{{ ansible_host }}"
+    #    status_code: 200
+    #  register: "{{test_url}}"
+    #
+    #- name: show status service apache
+    #  debug:
+    #    msg: "{{test_url}}"

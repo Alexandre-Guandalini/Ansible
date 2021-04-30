@@ -1,0 +1,8 @@
+[webserver]
+host_web ansible_host=172.17.0.5
+
+[dbserver]
+host_db ansible_host=172.17.0.6
+
+[all:vars]
+env="dev"

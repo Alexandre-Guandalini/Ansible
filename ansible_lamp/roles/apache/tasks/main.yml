@@ -1,0 +1,53 @@
+---
+- name: install apache2
+  apt: 
+    name: apache2 
+    update_cache: yes 
+    state: "{{status_apache}}" 
+  register: apache_output
+  notify:
+    - restart service apache
+
+- name: show intall apache
+  debug:
+    msg: "{{apache_output}}"
+
+- name: Copy apache.conf 
+  template:
+    src: "templates/apache2.conf.j2"
+    dest: "/etc/apache2/apache.conf"
+  register: copy_conf
+  notify:
+    - restart service apache
+    - debug service apache
+    - check service apache
+    - show status service apache
+
+- name: show copy conf
+  debug:
+    msg: "{{copy_conf}}"
+
+- name: Copy index
+  template:
+    src: 'templates/index.html.j2'
+    dest: '/var/www/html/index.html'
+  register: copy_index
+  notify: 
+    - restart service apache
+    - debug service apache
+    - check service apache
+    - show status service apache
+
+- name: show copy index 
+  debug:
+    msg: "{{copy_index}}"
+
+- name: Check server web return 200
+  uri:
+    url: "http://{{ ansible_host }}"
+    status_code: 200
+  register: test_url
+
+- name: show status service apache
+  debug:
+    msg: "{{test_url}}"
