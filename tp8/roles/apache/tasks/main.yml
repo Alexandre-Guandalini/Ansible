@@ -30,7 +30,12 @@
     - debug service apache
     - check service apache
     - show status service apache
-
+         
 - name: show copy index 
   debug:
     msg: "{{copy_index}}"
+
+- name: Check that a page returns a status 200
+  uri:
+    url: "http://{{ ansible_host }}"
+    status_code: 200

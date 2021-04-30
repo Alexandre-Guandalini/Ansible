@@ -1,5 +1,4 @@
 [webserver]
-host1
-
+host1 ansible_host=172.17.0.2
 [all:vars]
 env="dev"

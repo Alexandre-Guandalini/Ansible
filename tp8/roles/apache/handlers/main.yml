@@ -16,3 +16,8 @@
   debug:
     msg: "{{service_apache_output}}"
 
+- name: Check that a page returns a status 200
+  uri:
+    url: "http://{{ ansible_host }}"
+    status_code: 200
+
