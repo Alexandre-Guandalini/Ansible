@@ -1,0 +1,26 @@
+- name: Install Mysql
+  apt: 
+    name: mysql 
+    update_cache: yes 
+    state: present
+  register: install_mysql
+
+- name: show install mysql
+  debug:
+    msg: "{{install_mysql}}"
+
+- name: Sets the root password
+    mysql_user:
+      name: root
+      password: "{{ mysql_root_password }}"
+     
+- name:  Sets the root password
+    mysql_user:
+      name: "{{item.user}}"
+      password: "{{item.password}}"
+    loop:
+        - name: "{{user}}" 
+          password: "{{pass}}"
+        - name: "{{user2}}"
+          password: "{{pass2}}"
+  

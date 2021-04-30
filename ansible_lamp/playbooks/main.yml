@@ -5,5 +5,5 @@
           - "vars/{{env}}_vars.yml"
           - "vars/{{env}}_vault.yml"
   roles:
-          #- { role: apache }
+          - { role: apache }
           - { role: php }
